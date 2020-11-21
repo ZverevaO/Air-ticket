@@ -17,6 +17,8 @@
 		D79A0D202562707800DDD3FA /* City.m in Sources */ = {isa = PBXBuildFile; fileRef = D79A0D1F2562707800DDD3FA /* City.m */; };
 		D79A0D2425627B9700DDD3FA /* Airport.m in Sources */ = {isa = PBXBuildFile; fileRef = D79A0D2325627B9700DDD3FA /* Airport.m */; };
 		D79A0D29256280A300DDD3FA /* DataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D79A0D28256280A300DDD3FA /* DataManager.m */; };
+		D7D90F0A25698BF900A3C4EC /* PlaceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D7D90F0925698BF900A3C4EC /* PlaceViewController.m */; };
+		D7D90F0D2569968900A3C4EC /* SearchRequest.h in Sources */ = {isa = PBXBuildFile; fileRef = D7D90F0C2569968800A3C4EC /* SearchRequest.h */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -39,6 +41,9 @@
 		D79A0D2325627B9700DDD3FA /* Airport.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Airport.m; sourceTree = "<group>"; };
 		D79A0D27256280A300DDD3FA /* DataManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DataManager.h; sourceTree = "<group>"; };
 		D79A0D28256280A300DDD3FA /* DataManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DataManager.m; sourceTree = "<group>"; };
+		D7D90F0825698BF900A3C4EC /* PlaceViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PlaceViewController.h; sourceTree = "<group>"; };
+		D7D90F0925698BF900A3C4EC /* PlaceViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PlaceViewController.m; sourceTree = "<group>"; };
+		D7D90F0C2569968800A3C4EC /* SearchRequest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SearchRequest.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -84,6 +89,8 @@
 				D79A0D0A256260B700DDD3FA /* LaunchScreen.storyboard */,
 				D79A0D0D256260B700DDD3FA /* Info.plist */,
 				D79A0D0E256260B700DDD3FA /* main.m */,
+				D7D90F0825698BF900A3C4EC /* PlaceViewController.h */,
+				D7D90F0925698BF900A3C4EC /* PlaceViewController.m */,
 			);
 			path = AirTicket;
 			sourceTree = "<group>";
@@ -104,6 +111,7 @@
 				D79A0D1F2562707800DDD3FA /* City.m */,
 				D79A0D2225627B9700DDD3FA /* Airport.h */,
 				D79A0D2325627B9700DDD3FA /* Airport.m */,
+				D7D90F0C2569968800A3C4EC /* SearchRequest.h */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -185,12 +193,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D7D90F0A25698BF900A3C4EC /* PlaceViewController.m in Sources */,
 				D79A0D04256260B400DDD3FA /* MainViewController.m in Sources */,
 				D79A0CFE256260B400DDD3FA /* AppDelegate.m in Sources */,
 				D79A0D2425627B9700DDD3FA /* Airport.m in Sources */,
 				D79A0D202562707800DDD3FA /* City.m in Sources */,
 				D79A0D0F256260B700DDD3FA /* main.m in Sources */,
 				D79A0D29256280A300DDD3FA /* DataManager.m in Sources */,
+				D7D90F0D2569968900A3C4EC /* SearchRequest.h in Sources */,
 				D79A0D01256260B400DDD3FA /* SceneDelegate.m in Sources */,
 				D79A0D1C2562702C00DDD3FA /* Country.m in Sources */,
 			);

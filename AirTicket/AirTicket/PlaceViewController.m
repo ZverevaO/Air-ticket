@@ -6,44 +6,108 @@
 //
 
 #import "PlaceViewController.h"
+#import "City.h"
+#import "Airport.h"
+
+#define kReuseIdentifier @"CellIdentifier"
 
 @interface PlaceViewController ()
+
+@property (nonatomic, assign) PlaceType placeType;
+@property (nonatomic, weak) UISegmentedControl *segmentedControl;
+@property (nonatomic, copy) NSArray *currentArray;
 
 @end
 
 @implementation PlaceViewController
 
+-(instancetype)initWithType:(PlaceType)type {
+    self = [super init];
+    if (self) {
+     
+        self.placeType = type;
+    
+    }
+    return  self;
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
+    [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:kReuseIdentifier];
     
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    UISegmentedControl *segments = [[UISegmentedControl alloc] initWithItems:@[ @"Cities", @"Airports"]];
+    [segments addTarget:self action: @selector(changeSource:) forControlEvents:UIControlEventValueChanged];
+    segments.selectedSegmentIndex = 0;
+    segments.tintColor = [UIColor blackColor];
+    self.navigationItem.titleView = segments;
+    self.segmentedControl = segments;
+    [self changeSource: segments];
+    
+    switch (self.placeType) {
+        case PlaceTypeArrival:
+            self.title = @"Arrival";
+            break;
+            
+        case PlaceTypeDeparture:
+            self.title = @"Departure";
+            break;
+    }
+
 }
+
+- (void)changeSource: (UISegmentedControl *) sender {
+    switch (self.segmentedControl.selectedSegmentIndex) {
+        case 0:
+            self.currentArray = [[DataManager sharedInstance] cities];
+            break;
+        case 1:
+            self.  currentArray = [[DataManager sharedInstance] airports];
+            break;
+        default:
+            break;
+    }
+    [self.tableView reloadData];
+}
+
 
 #pragma mark - Table view data source
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-#warning Incomplete implementation, return the number of sections
-    return 0;
-}
+
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-#warning Incomplete implementation, return the number of rows
-    return 0;
+
+    return self.currentArray.count;
 }
 
-/*
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:<#@"reuseIdentifier"#> forIndexPath:indexPath];
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kReuseIdentifier forIndexPath:indexPath];
     
-    // Configure the cell...
+    if (!cell) {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:kReuseIdentifier];
+        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+    }
     
+    if (self.segmentedControl.selectedSegmentIndex == 0) {
+        City *city = self.currentArray[indexPath.row];
+        cell.textLabel.text = city.name;
+        cell.detailTextLabel.text = city.code;
+    } else {
+        Airport *airport = self.currentArray[indexPath.row];
+        cell.textLabel.text = airport.name;
+        cell.detailTextLabel.text = airport.code;
+    }
     return cell;
 }
-*/
+
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    DataSourceType dataType = ((int)self.segmentedControl.selectedSegmentIndex +1);
+    [self.delegate selectPlace:self.currentArray[indexPath.row] withType:self.placeType andDataType:dataType];
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
+
 
 /*
 // Override to support conditional editing of the table view.
