@@ -22,7 +22,9 @@
 }
 
 - (void)loadData {
+    
     dispatch_async(dispatch_get_global_queue(QOS_CLASS_UTILITY, 0), ^{
+        
         NSArray *countriesJsonArray = [self arrayOfFile:@"countries" ofType:@"json"];
         self->_countries = [self createObjectsFromArray:countriesJsonArray withType:(DataSourceTypeCountry)];
         
@@ -44,35 +46,47 @@
 
 - (NSArray *)arrayOfFile:(NSString *)fileName ofType:(NSString *) type {
     NSString *path = [[NSBundle mainBundle] pathForResource:fileName ofType:type];
-    NSData *data = [NSData dataWithContentsOfFile:path];
+    NSData *data = [NSData dataWithContentsOfFile:path options:0 error:nil];
     return [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
 }
 
 - (NSMutableArray *)createObjectsFromArray:(NSArray *) array withType:(DataSourceType)type {
-    NSMutableArray *result = [NSMutableArray new];
+    NSMutableArray *results = [NSMutableArray new];
     
     for (NSDictionary *json in array) {
         switch (type) {
             case DataSourceTypeCountry: {
                 Country *country = [[Country alloc] initWithDictionary:json];
-                [result addObject:country];
+                [results addObject:country];
                 break;
             }
             case DataSourceTypeCity:{
                 City *city = [[City alloc] initWithDictionary:json];
-                [result addObject:city];
+                [results addObject:city];
                 break;
             }
             case DataSourceTypeAirport:{
                 Airport *airport = [[Airport alloc] initWithDictionary: json];
-                [result addObject:airport];
+                [results addObject:airport];
                 break;
             }
         }
     }
     
-    return  result;
+    return  results;
 }
+
+- (City *)cityForIATA:(NSString *)iata {
+    if (iata) {
+        for (City *city in self.cities) {
+            if ([city.code isEqualToString:iata]) {
+                return city;
+            }
+        }
+    }
+    return nil;
+}
+
 
 //- (NSArray *)countries
 //{
