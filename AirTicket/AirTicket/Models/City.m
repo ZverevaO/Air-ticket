@@ -18,21 +18,11 @@
         self.name = dictionary[@"name"];
         self.countryCode = dictionary[@"country_code"];
         self.code = dictionary[@"code"];
-//        _timezone = [dictionary valueForKey:@"time_zone"];
-//        _translations = [dictionary valueForKey:@"name_translations"];
-//        _name = [dictionary valueForKey:@"name"];
-//        _countryCode = [dictionary valueForKey:@"country_code"];
-//        _code = [dictionary valueForKey:@"code"];
-//        NSDictionary *coords = [dictionary valueForKey:@"coordinates"];
         NSDictionary *coords = dictionary[@"coordinates"];
         if (coords && ![coords isEqual:[NSNull null]]) {
-//            NSNumber *lon = [coords valueForKey:@"lon"];
-//            NSNumber *lat = [coords valueForKey:@"lat"];
             NSNumber *lon = coords[@"lon"];
             NSNumber *lat = coords[@"lat"];
             if (![lon isEqual:[NSNull null]] && ![lat isEqual:[NSNull null]]) {
-                
-//                _coordinate = CLLocationCoordinate2DMake([lat doubleValue], [lon doubleValue]);
                 self.coordinate = CLLocationCoordinate2DMake(lat.doubleValue, lon.doubleValue);
             }
         }
