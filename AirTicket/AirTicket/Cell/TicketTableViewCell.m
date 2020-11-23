@@ -40,7 +40,7 @@
         UILabel *price =  [[UILabel alloc] initWithFrame:self.bounds];
         price.font = [UIFont systemFontOfSize:24.0 weight:UIFontWeightBold];
         [self.contentView addSubview:price];
-        self.placesLabel = price;
+        self.priceLabel = price;
         
         UIImageView *logo = [[UIImageView alloc] initWithFrame:self.bounds];
         //_airlineLogoView = [[UIImageView alloc] initWithFrame:self.bounds];
