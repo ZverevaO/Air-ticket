@@ -6,6 +6,8 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <CoreLocation/CoreLocation.h>
+
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -37,7 +39,7 @@ typedef enum {
 - (void)loadData;
 
 - (City *)cityForIATA:(NSString *)iata;
-
+- (City *)cityForLocation:(CLLocation *)location;
 @end
 
 NS_ASSUME_NONNULL_END

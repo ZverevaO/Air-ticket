@@ -11,11 +11,12 @@
 
 #define kReuseIdentifier @"CellIdentifier"
 
-@interface PlaceViewController ()
+@interface PlaceViewController () <UISearchResultsUpdating>
 
 @property (nonatomic, assign) PlaceType placeType;
 @property (nonatomic, weak) UISegmentedControl *segmentedControl;
 @property (nonatomic, copy) NSArray *currentArray;
+@property (nonatomic, copy) NSArray *filterArray;
 
 @end
 
@@ -34,7 +35,12 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    //[self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:kReuseIdentifier];
+    UISearchController *searchController = [[UISearchController alloc] initWithSearchResultsController:nil];
+    searchController.obscuresBackgroundDuringPresentation = NO;
+    searchController.searchResultsUpdater = self;
+    self.filterArray = @[];
+    
+    self.navigationItem.searchController = searchController;
     
     UISegmentedControl *segments = [[UISegmentedControl alloc] initWithItems:@[ @"Cities", @"Airports"]];
     [segments addTarget:self action: @selector(changeSource:) forControlEvents:UIControlEventValueChanged];
@@ -77,7 +83,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
 
-    return self.currentArray.count;
+    return self.filterArray.count > 0 ? self.filterArray.count : self.currentArray.count;
 }
 
 
@@ -89,12 +95,14 @@
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     }
     
+    NSArray *array = self.filterArray.count > 0 ? self.filterArray : self.currentArray;
+    
     if (self.segmentedControl.selectedSegmentIndex == 0) {
-        City *city = self.currentArray[indexPath.row];
+        City *city = array[indexPath.row];
         cell.textLabel.text = city.name;
         cell.detailTextLabel.text = city.code;
     } else {
-        Airport *airport = self.currentArray[indexPath.row];
+        Airport *airport = array[indexPath.row];
         cell.textLabel.text = airport.name;
         cell.detailTextLabel.text = airport.code;
     }
@@ -103,11 +111,24 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     DataSourceType dataType = ((int)self.segmentedControl.selectedSegmentIndex +1);
-    [self.delegate selectPlace:self.currentArray[indexPath.row] withType:self.placeType andDataType:dataType];
+    
+    NSArray *array = self.filterArray.count > 0 ? self.filterArray : self.currentArray;
+    
+    [self.delegate selectPlace:array[indexPath.row] withType:self.placeType andDataType:dataType];
     [self.navigationController popViewControllerAnimated:YES];
 }
 
-
+#pragma mark - SearchResultsUpdating
+- (void) updateSearchResultsForSearchController:(UISearchController *)searchController {
+    if (searchController.searchBar.text.length > 0) {
+        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"name CONTAINS[cd] %@", searchController.searchBar.text];
+        self.filterArray = [self.currentArray filteredArrayUsingPredicate:predicate];
+        
+    } else {
+        self.filterArray = @[];
+    }
+    [self.tableView reloadData];
+}
 
 /*
 // Override to support conditional editing of the table view.

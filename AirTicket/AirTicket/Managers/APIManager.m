@@ -10,12 +10,13 @@
 #import "Airport.h"
 #import "Ticket.h"
 #import "SearchRequest.h"
+#import "MapPrice.h"
 
 #define API_TOKEN @"4b626d0c06241d568cc2d5d0458be175"
 #define API_URL_IP_ADDRESS @"https://api.ipify.org/?format=json"
 #define API_URL_CHEAP @"https://api.travelpayouts.com/v1/prices/cheap"
 #define API_URL_CITY_FROM_IP @"https://www.travelpayouts.com/whereami?ip="
-
+#define API_URL_MAP_PRICE @"https://map.aviasales.ru/prices.json?origin_iata="
 
 
 @implementation APIManager
@@ -111,6 +112,33 @@ NSString * SearchRequestQuery(SearchRequest request) {
                   [dateFormatter stringFromDate:request.returnDate]];
     }
     return result;
+}
+
+- (void)mapPricesFor:(City *)origin withCompletion:(void (^)(NSArray *prices))completion
+{
+    static BOOL isLoading;
+    if (isLoading) { return; }
+    isLoading = YES;
+    
+    NSString *url = [NSString stringWithFormat:@"%@%@", API_URL_MAP_PRICE, origin.code];
+    [self load: url withCompletion:^(id  _Nullable result) {
+        
+        NSMutableArray *prices;// = [NSMutableArray new];
+        if ([result isKindOfClass: [NSArray class]]) {
+            NSArray *array = result;
+            prices = [[NSMutableArray alloc] initWithCapacity:array.count];
+            
+            for (NSDictionary *mapPriceDictionary in array) {
+                MapPrice *mapPrice = [[MapPrice alloc] initWithDictionary:mapPriceDictionary withOrigin:origin];
+                [prices addObject:mapPrice];
+            }
+        }
+        isLoading = NO;
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            completion(prices);
+        });
+    }];
 }
 
 

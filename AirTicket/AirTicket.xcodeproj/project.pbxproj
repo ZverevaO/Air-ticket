@@ -23,6 +23,10 @@
 		D79A0D202562707800DDD3FA /* City.m in Sources */ = {isa = PBXBuildFile; fileRef = D79A0D1F2562707800DDD3FA /* City.m */; };
 		D79A0D2425627B9700DDD3FA /* Airport.m in Sources */ = {isa = PBXBuildFile; fileRef = D79A0D2325627B9700DDD3FA /* Airport.m */; };
 		D79A0D29256280A300DDD3FA /* DataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D79A0D28256280A300DDD3FA /* DataManager.m */; };
+		D7D621EE25722B4C006F2775 /* MapPrice.m in Sources */ = {isa = PBXBuildFile; fileRef = D7D621ED25722B4C006F2775 /* MapPrice.m */; };
+		D7D621F225722C51006F2775 /* LocationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D7D621F125722C51006F2775 /* LocationManager.m */; };
+		D7D621F6257233BF006F2775 /* MapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D7D621F5257233BF006F2775 /* MapViewController.m */; };
+		D7D621FA25741827006F2775 /* TabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = D7D621F925741827006F2775 /* TabBarController.m */; };
 		D7D90F0A25698BF900A3C4EC /* PlaceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D7D90F0925698BF900A3C4EC /* PlaceViewController.m */; };
 		D7D90F0D2569968900A3C4EC /* SearchRequest.h in Sources */ = {isa = PBXBuildFile; fileRef = D7D90F0C2569968800A3C4EC /* SearchRequest.h */; };
 		D7D90F12256A32EB00A3C4EC /* APIManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D7D90F11256A32EB00A3C4EC /* APIManager.m */; };
@@ -58,6 +62,14 @@
 		D79A0D2325627B9700DDD3FA /* Airport.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Airport.m; sourceTree = "<group>"; };
 		D79A0D27256280A300DDD3FA /* DataManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DataManager.h; sourceTree = "<group>"; };
 		D79A0D28256280A300DDD3FA /* DataManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DataManager.m; sourceTree = "<group>"; };
+		D7D621EC25722B4C006F2775 /* MapPrice.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MapPrice.h; sourceTree = "<group>"; };
+		D7D621ED25722B4C006F2775 /* MapPrice.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MapPrice.m; sourceTree = "<group>"; };
+		D7D621F025722C51006F2775 /* LocationManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LocationManager.h; sourceTree = "<group>"; };
+		D7D621F125722C51006F2775 /* LocationManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LocationManager.m; sourceTree = "<group>"; };
+		D7D621F4257233BF006F2775 /* MapViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MapViewController.h; sourceTree = "<group>"; };
+		D7D621F5257233BF006F2775 /* MapViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MapViewController.m; sourceTree = "<group>"; };
+		D7D621F825741827006F2775 /* TabBarController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TabBarController.h; sourceTree = "<group>"; };
+		D7D621F925741827006F2775 /* TabBarController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TabBarController.m; sourceTree = "<group>"; };
 		D7D90F0825698BF900A3C4EC /* PlaceViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PlaceViewController.h; sourceTree = "<group>"; };
 		D7D90F0925698BF900A3C4EC /* PlaceViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PlaceViewController.m; sourceTree = "<group>"; };
 		D7D90F0C2569968800A3C4EC /* SearchRequest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SearchRequest.h; sourceTree = "<group>"; };
@@ -115,6 +127,10 @@
 				D7D90F0925698BF900A3C4EC /* PlaceViewController.m */,
 				D74E2096256A51730097B304 /* TicketsViewController.h */,
 				D74E2097256A51730097B304 /* TicketsViewController.m */,
+				D7D621F4257233BF006F2775 /* MapViewController.h */,
+				D7D621F5257233BF006F2775 /* MapViewController.m */,
+				D7D621F825741827006F2775 /* TabBarController.h */,
+				D7D621F925741827006F2775 /* TabBarController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -179,6 +195,8 @@
 				D7D90F0C2569968800A3C4EC /* SearchRequest.h */,
 				D7D90F14256A3B5C00A3C4EC /* Ticket.h */,
 				D7D90F15256A3B5C00A3C4EC /* Ticket.m */,
+				D7D621EC25722B4C006F2775 /* MapPrice.h */,
+				D7D621ED25722B4C006F2775 /* MapPrice.m */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -190,6 +208,8 @@
 				D79A0D28256280A300DDD3FA /* DataManager.m */,
 				D7D90F10256A32EB00A3C4EC /* APIManager.h */,
 				D7D90F11256A32EB00A3C4EC /* APIManager.m */,
+				D7D621F025722C51006F2775 /* LocationManager.h */,
+				D7D621F125722C51006F2775 /* LocationManager.m */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -309,8 +329,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D7D621F225722C51006F2775 /* LocationManager.m in Sources */,
 				D7D90F0A25698BF900A3C4EC /* PlaceViewController.m in Sources */,
 				D79A0D04256260B400DDD3FA /* MainViewController.m in Sources */,
+				D7D621FA25741827006F2775 /* TabBarController.m in Sources */,
 				D79A0CFE256260B400DDD3FA /* AppDelegate.m in Sources */,
 				D74E2093256A4FBA0097B304 /* TicketTableViewCell.m in Sources */,
 				D79A0D2425627B9700DDD3FA /* Airport.m in Sources */,
@@ -318,10 +340,12 @@
 				D79A0D0F256260B700DDD3FA /* main.m in Sources */,
 				D79A0D29256280A300DDD3FA /* DataManager.m in Sources */,
 				D74E2098256A51730097B304 /* TicketsViewController.m in Sources */,
+				D7D621EE25722B4C006F2775 /* MapPrice.m in Sources */,
 				D7D90F0D2569968900A3C4EC /* SearchRequest.h in Sources */,
 				D79A0D01256260B400DDD3FA /* SceneDelegate.m in Sources */,
 				D79A0D1C2562702C00DDD3FA /* Country.m in Sources */,
 				D7D90F12256A32EB00A3C4EC /* APIManager.m in Sources */,
+				D7D621F6257233BF006F2775 /* MapViewController.m in Sources */,
 				D7D90F16256A3B5C00A3C4EC /* Ticket.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
