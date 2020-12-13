@@ -50,16 +50,31 @@
         [self.contentView addSubview:logo];
         self.airlineLogoView = logo;
         
+        [UIView animateWithDuration:1.0
+                              delay: 3.0
+                            options:UIViewAnimationOptionCurveEaseOut
+                         animations:^{
+            logo.alpha = 0.0;
+            
+            [UIView animateWithDuration:1.0
+                                  delay:4.0
+                                options: UIViewAnimationOptionCurveEaseOut
+                             animations:^{
+                logo.alpha = 1.0;
+            }
+                             completion:nil];
+            
+        }
+                         completion:nil];
+        
         
         UILabel *places = [[UILabel alloc] initWithFrame:self.bounds];
-        //_placesLabel = [[UILabel alloc] initWithFrame:self.bounds];
         places.font = [UIFont systemFontOfSize:15.0 weight:UIFontWeightLight];
         places.textColor = [UIColor darkGrayColor];
         [self.contentView addSubview:places];
         self.placesLabel = places;
         
         UILabel *date = [[UILabel alloc] initWithFrame:self.bounds];
-        //_dateLabel = [[UILabel alloc] initWithFrame:self.bounds];
         date.font = [UIFont systemFontOfSize:15.0 weight:UIFontWeightRegular];
         [self.contentView addSubview:date];
         self.dateLabel = date;
