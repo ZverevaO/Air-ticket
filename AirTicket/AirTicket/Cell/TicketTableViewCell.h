@@ -12,9 +12,13 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+@class FavoriteTicket, Ticket;
+
 @interface TicketTableViewCell : UITableViewCell
 
 @property (nonatomic, strong) Ticket *ticket;
+@property (nonatomic, strong) FavoriteTicket *favorite;
+
 
 + (NSString *)identifier;
 

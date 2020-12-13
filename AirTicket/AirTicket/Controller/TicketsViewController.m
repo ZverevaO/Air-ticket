@@ -7,10 +7,15 @@
 
 #import "TicketsViewController.h"
 #import "TicketTableViewCell.h"
+#import "CoreDataManager.h"
+#import "Ticket.h"
 #define TicketCellReuseIdentifier @"TicketCellIdentifier"
 
 
+
 @interface TicketsViewController ()
+
+@property (nonatomic, assign) BOOL isFavorites;
 @property (nonatomic, strong) NSArray *tickets;
 @end
 
@@ -28,13 +33,32 @@
     return self;
 }
 
+- (instancetype)initAsFavoriteTickets {
+    self = [self initWithTickets:@[]];
+    self.isFavorites = YES;
+    
+    return self;
+}
+
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.title = @"Tickets";
+    self.title = self.isFavorites ? @"Favorites" : @"Tickets";
+    self.navigationController.navigationBar.prefersLargeTitles = self.isFavorites;
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    
     [self.tableView registerClass:[TicketTableViewCell class] forCellReuseIdentifier:[TicketTableViewCell identifier]];
+    
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
+    if (self.isFavorites) {
+        self.tickets = [[CoreDataManager sharedInstance] favorites];
+        [self.tableView reloadData];
+    }
     
 }
 
@@ -53,15 +77,48 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     TicketTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:[TicketTableViewCell identifier] forIndexPath:indexPath];
-    cell.ticket = self.tickets[indexPath.row];
+    if (self.isFavorites) {
+        cell.favorite = self.tickets[indexPath.row];
+    } else {
+        cell.ticket = self.tickets[indexPath.row];
+    }
     
     return cell;
 }
+
+#pragma mark - TableViwe Delegate
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     return 140.0;
 }
 
+
+- (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (self.isFavorites) {
+        return;
+    }
+    
+    UIAlertController *sheet = [UIAlertController alertControllerWithTitle:@"Ticket actions" message:@"What do you want to do with the ticket?" preferredStyle:(UIAlertControllerStyleActionSheet)];
+    UIAlertAction *action;
+    UIAlertAction *cancel = [UIAlertAction actionWithTitle:@"Cancel" style:(UIAlertActionStyleCancel) handler:nil];
+    Ticket *ticket = self.tickets[indexPath.row];
+    CoreDataManager *manager = [CoreDataManager sharedInstance];
+    if ([manager isFavorite:ticket]) {
+        action = [UIAlertAction actionWithTitle:@"Remove from favorites" style:(UIAlertActionStyleDestructive) handler:^(UIAlertAction * _Nonnull action) {
+            [manager removeFromFavorite:ticket];
+        }];
+    } else
+    {
+        action = [UIAlertAction actionWithTitle:@"Add to favorites" style:(UIAlertActionStyleDefault) handler:^(UIAlertAction * _Nonnull action) {
+            [manager addToFavorite:ticket];
+        }];
+    }
+    
+    [sheet addAction:action];
+    [sheet addAction:cancel];
+    
+    [self presentViewController:sheet animated:YES completion:nil];
+}
 
 
 /*
