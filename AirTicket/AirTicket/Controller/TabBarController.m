@@ -9,6 +9,7 @@
 
 #import "MainViewController.h"
 #import "MapViewController.h"
+#import "TicketsViewController.h"
 
 @interface TabBarController ()
 
@@ -42,7 +43,12 @@
     
     
 
-    
+    TicketsViewController *favVC = [[TicketsViewController alloc] initAsFavoriteTickets];
+    favVC.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"Favorites"
+                                                     image:[UIImage systemImageNamed:@"star"]
+                                             selectedImage:[UIImage systemImageNamed:@"star.fill"]];
+    UINavigationController *favNC = [[UINavigationController alloc] initWithRootViewController:favVC];
+    [controllers addObject:favNC];
     
     return  controllers;
 }

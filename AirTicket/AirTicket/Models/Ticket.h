@@ -6,6 +6,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "MapPrice.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -14,13 +15,14 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) NSNumber *price;
 @property (nonatomic, copy) NSString *airline;
 @property (nonatomic, strong) NSDate *departure;
-@property (nonatomic, strong) NSDate *expires;
+@property (nonatomic, strong) NSDate *expiers;
 @property (nonatomic, strong) NSNumber *flightNumber;
 @property (nonatomic, strong) NSDate *returnDate;
 @property (nonatomic, copy) NSString *from;
 @property (nonatomic, copy) NSString *to;
 
 - (instancetype)initWithDictionary:(NSDictionary *)dictionary;
+- (instancetype)initWithMapPrice:(MapPrice *) price;
 
 
 @end
