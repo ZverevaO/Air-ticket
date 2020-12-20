@@ -13,7 +13,7 @@
 
 
 @interface TicketTableViewCell ()
-@property (nonatomic, weak) UIImageView *airlineLogoView;
+//@property (nonatomic, weak) UIImageView *airlineLogoView;
 @property (nonatomic, weak) UILabel *priceLabel;
 @property (nonatomic, weak) UILabel *placesLabel;
 @property (nonatomic, weak) UILabel *dateLabel;

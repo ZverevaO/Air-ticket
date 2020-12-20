@@ -6,6 +6,9 @@
 //
 
 #import "AppDelegate.h"
+#import "NotificationCenter.h"
+#import <UserNotifications/UserNotifications.h>
+
 
 @interface AppDelegate ()
 
@@ -16,6 +19,10 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+    
+
+       
+    [[NotificationCenter sharedInstance] registerService];
     return YES;
 }
 

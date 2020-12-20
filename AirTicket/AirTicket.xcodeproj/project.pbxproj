@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		07C76970823926C40BE2BCE5 /* Pods_AirTicket.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 74B65DBFCCAB81AE82500344 /* Pods_AirTicket.framework */; };
+		D722E98C258F182000584477 /* NotificationCenter.m in Sources */ = {isa = PBXBuildFile; fileRef = D722E98B258F182000584477 /* NotificationCenter.m */; };
 		D74E2093256A4FBA0097B304 /* TicketTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D74E2092256A4FBA0097B304 /* TicketTableViewCell.m */; };
 		D74E2098256A51730097B304 /* TicketsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D74E2097256A51730097B304 /* TicketsViewController.m */; };
 		D755078C256A4BE30082D9B1 /* cities.json in Resources */ = {isa = PBXBuildFile; fileRef = D7550789256A4BE30082D9B1 /* cities.json */; };
@@ -40,6 +41,8 @@
 /* Begin PBXFileReference section */
 		74B65DBFCCAB81AE82500344 /* Pods_AirTicket.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AirTicket.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8631D02BF304BFE09207BDAE /* Pods-AirTicket.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AirTicket.debug.xcconfig"; path = "Target Support Files/Pods-AirTicket/Pods-AirTicket.debug.xcconfig"; sourceTree = "<group>"; };
+		D722E98A258F182000584477 /* NotificationCenter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NotificationCenter.h; sourceTree = "<group>"; };
+		D722E98B258F182000584477 /* NotificationCenter.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NotificationCenter.m; sourceTree = "<group>"; };
 		D74E2091256A4FBA0097B304 /* TicketTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TicketTableViewCell.h; sourceTree = "<group>"; };
 		D74E2092256A4FBA0097B304 /* TicketTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TicketTableViewCell.m; sourceTree = "<group>"; };
 		D74E2096256A51730097B304 /* TicketsViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TicketsViewController.h; sourceTree = "<group>"; };
@@ -209,6 +212,8 @@
 				D7D90F15256A3B5C00A3C4EC /* Ticket.m */,
 				D7D621EC25722B4C006F2775 /* MapPrice.h */,
 				D7D621ED25722B4C006F2775 /* MapPrice.m */,
+				D722E98A258F182000584477 /* NotificationCenter.h */,
+				D722E98B258F182000584477 /* NotificationCenter.m */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -357,6 +362,7 @@
 			files = (
 				D7D621F225722C51006F2775 /* LocationManager.m in Sources */,
 				D7D62207257B5A26006F2775 /* FavoriteTicket+CoreDataClass.m in Sources */,
+				D722E98C258F182000584477 /* NotificationCenter.m in Sources */,
 				D7D90F0A25698BF900A3C4EC /* PlaceViewController.m in Sources */,
 				D79A0D04256260B400DDD3FA /* MainViewController.m in Sources */,
 				D7D621FA25741827006F2775 /* TabBarController.m in Sources */,

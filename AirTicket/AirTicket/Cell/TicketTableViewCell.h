@@ -18,6 +18,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, strong) Ticket *ticket;
 @property (nonatomic, strong) FavoriteTicket *favorite;
+@property (nonatomic, weak) UIImageView *airlineLogoView;
 
 
 + (NSString *)identifier;
