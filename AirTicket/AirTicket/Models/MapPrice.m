@@ -23,6 +23,7 @@
         self.value = [[dictionary valueForKey:@"value"] integerValue];
         self.distance = [[dictionary valueForKey:@"distance"] integerValue];
         self.actual = [[dictionary valueForKey:@"actual"] boolValue];
+        //self.validDate =  [self dateFromString:[dictionary valueForKey:@"ttl"]];
     }
     return self;
 }

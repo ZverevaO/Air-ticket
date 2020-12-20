@@ -11,9 +11,11 @@
 #import "APIManager.h"
 #import "DataManager.h"
 #import "LocationManager.h"
+#import "CoreDataManager.h"
 
 #import "City.h"
 #import "MapPrice.h"
+#import "Ticket.h"
 
 @interface MapViewController () <MKMapViewDelegate>
 
@@ -84,4 +86,47 @@
         [self.mapView addAnnotation:annotation];
     }
 }
+- (void)mapView:(MKMapView *)mapView didSelectAnnotationView:(MKAnnotationView *)view NS_AVAILABLE(10_9, 4_0) {
+    
+    UIAlertController *sheet = [UIAlertController alertControllerWithTitle:@"Ticket actions" message:@"What do you want to do with the ticket?" preferredStyle:(UIAlertControllerStyleActionSheet)];
+    UIAlertAction *action;
+   
+    UIAlertAction *cancel = [UIAlertAction actionWithTitle:@"Cancel" style:(UIAlertActionStyleCancel) handler:nil];
+    MapPrice *price = [self getPriceByCity:view.annotation.coordinate];
+    
+    Ticket *ticket = [[Ticket alloc] initWithMapPrice:price];
+    NSLog(@"Ticket 121311= %@", ticket.from);
+    
+    
+    CoreDataManager *manager = [CoreDataManager sharedInstance];
+    if ([manager isFavorite:ticket]) {
+        action = [UIAlertAction actionWithTitle:@"Remove from favorites" style:(UIAlertActionStyleDestructive) handler:^(UIAlertAction * _Nonnull action) {
+            [manager removeFromFavorite:ticket];
+        }];
+    } else
+    {
+        action = [UIAlertAction actionWithTitle:@"Add to favorites" style:(UIAlertActionStyleDefault) handler:^(UIAlertAction * _Nonnull action) {
+            [manager addToFavorite:ticket];
+        }];
+    }
+    
+    [sheet addAction:action];
+    [sheet addAction:cancel];
+    
+    [self presentViewController:sheet animated:YES completion:nil];
+}
+
+-(MapPrice *)getPriceByCity: (CLLocationCoordinate2D) coordinate {
+    MapPrice *resultPrice;
+    NSArray *mprices = self.prices;
+    
+    for (MapPrice * price in mprices) {
+        if (price.destination.coordinate.latitude == coordinate.latitude && price.destination.coordinate.longitude == coordinate.longitude) {
+            resultPrice = price;
+        };
+    }
+    
+    return resultPrice;
+}
+
 @end

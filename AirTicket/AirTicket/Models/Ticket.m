@@ -6,6 +6,7 @@
 //
 
 #import "Ticket.h"
+#import "MapPrice.h"
 
 @implementation Ticket
 
@@ -13,11 +14,27 @@
     self = [super init];
     if (self) {
         _airline = [dictionary valueForKey:@"airline"];
-        _expires = dateFromString([dictionary valueForKey:@"expires_at"]);
+        _expiers = dateFromString([dictionary valueForKey:@"expires_at"]);
         _departure = dateFromString([dictionary valueForKey:@"departure_at"]);
         _flightNumber = [dictionary valueForKey:@"flight_number"];
         _price = [dictionary valueForKey:@"price"];
         _returnDate = dateFromString([dictionary valueForKey:@"return_at"]);
+    }
+    return self;
+}
+
+//создаем билет из MapPrice для сохранения в избранных
+- (instancetype)initWithMapPrice:(MapPrice *) price {
+    self = [super init];
+    if (self) {
+        self.airline = @"";
+        self.expiers = price.departure;
+        self.departure = price.departure;
+        self.flightNumber = [NSNumber numberWithInt:111];
+        self.price = [NSNumber numberWithLong: price.value];
+        self.returnDate = price.returnDate;
+        self.from = price.origin.code;
+        self.to = price.destination.code;
     }
     return self;
 }

@@ -7,11 +7,13 @@
 
 #import "TicketTableViewCell.h"
 #import <YYWebImage/YYWebImage.h>
+#import "FavoriteTicket+CoreDataClass.h"
+#import "Ticket.h"
 #import "APIManager.h"
 
 
 @interface TicketTableViewCell ()
-@property (nonatomic, weak) UIImageView *airlineLogoView;
+//@property (nonatomic, weak) UIImageView *airlineLogoView;
 @property (nonatomic, weak) UILabel *priceLabel;
 @property (nonatomic, weak) UILabel *placesLabel;
 @property (nonatomic, weak) UILabel *dateLabel;
@@ -48,16 +50,31 @@
         [self.contentView addSubview:logo];
         self.airlineLogoView = logo;
         
+        [UIView animateWithDuration:1.0
+                              delay: 3.0
+                            options:UIViewAnimationOptionCurveEaseOut
+                         animations:^{
+            logo.alpha = 0.0;
+            
+            [UIView animateWithDuration:1.0
+                                  delay:4.0
+                                options: UIViewAnimationOptionCurveEaseOut
+                             animations:^{
+                logo.alpha = 1.0;
+            }
+                             completion:nil];
+            
+        }
+                         completion:nil];
+        
         
         UILabel *places = [[UILabel alloc] initWithFrame:self.bounds];
-        //_placesLabel = [[UILabel alloc] initWithFrame:self.bounds];
         places.font = [UIFont systemFontOfSize:15.0 weight:UIFontWeightLight];
         places.textColor = [UIColor darkGrayColor];
         [self.contentView addSubview:places];
         self.placesLabel = places;
         
         UILabel *date = [[UILabel alloc] initWithFrame:self.bounds];
-        //_dateLabel = [[UILabel alloc] initWithFrame:self.bounds];
         date.font = [UIFont systemFontOfSize:15.0 weight:UIFontWeightRegular];
         [self.contentView addSubview:date];
         self.dateLabel = date;
@@ -90,6 +107,22 @@
     
 }
 
+- (void)setFavorite:(FavoriteTicket *)ticket {
+    _favorite = ticket;
+    
+    self.priceLabel.text = [NSString stringWithFormat:@"%lld  руб.", ticket.price];
+    self.placesLabel.text = [NSString stringWithFormat:@"%@ - %@", ticket.from, ticket.to];
+    
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    dateFormatter.dateFormat = @"dd MMMM yyyy hh:mm";
+    self.dateLabel.text = [dateFormatter stringFromDate:ticket.departure];
+    if (ticket.airline) {
+        NSURL *urlLogo = [NSURL URLWithString:[NSString stringWithFormat:@"https://pics.avs.io/200/200/%@.png",ticket.airline]];
+        [self.airlineLogoView yy_setImageWithURL:urlLogo options:YYWebImageOptionSetImageWithFadeAnimation];
+    }
+   
+    
+}
 
 
 @end

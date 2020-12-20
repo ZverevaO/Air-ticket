@@ -16,6 +16,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (strong, nonatomic) City *origin;
 @property (strong, nonatomic) NSDate *departure;
 @property (strong, nonatomic) NSDate *returnDate;
+//@property (strong, nonatomic) NSDate *validDate;
 @property (nonatomic) NSInteger numberOfChanges;
 @property (nonatomic) NSInteger value;
 @property (nonatomic) NSInteger distance;
